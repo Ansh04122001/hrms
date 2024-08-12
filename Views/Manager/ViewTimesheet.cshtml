@@ -1,0 +1,158 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>View TimeSheet</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Manager" asp-action="Dashboard">Home</a></li>
+                <li class="breadcrumb-item">TimeSheet</li>
+                <li class="breadcrumb-item active"><a asp-controller="Manager" asp-action="ViewTimeSheet">View TimeSheet</a> </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View TimeSheet</h5>
+                        <div class="container">
+                            <div class="row">
+                                <input type="hidden" value="@ViewBag.ManagerName" id="managername" />
+                                <div class="col-md-4">
+                                    <label for="employeeName">Employee Name:</label>
+                                    <select class="form-control" id="employeeName" asp-items="@ViewBag.Employees">
+                                        <option value="">Select Employee</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" id="startDate" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" id="endDate" class="form-control">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <label for="clearButton">Clear:</label>
+                                    <input type="button" id="clearButton" class="form-control" value="Clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table class="table" id="employeeDetailsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Code</th>
+                                        <th>Employee Name</th>
+                                        <th>Manager Name</th>
+                                        <th>Department</th>
+                                        <th>Project Name</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Total Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    $(document).ready(function () {
+        var table = $('#employeeDetailsTable').DataTable({
+            "ajax": {
+                url: '/Manager/Timesheetdetails',
+                type: 'GET',
+                data: function (d) {
+                    d.employeeName = $('#employeeName').val();
+                    d.managerName = $('#managername').val();
+                },
+                datatype: "json",
+                error: function (xhr, errorText, errorType) {
+                    console.log("An error occurred while fetching data:", errorText, errorType);
+                },
+                "dataSrc": function (data) {
+                    // Filter data based on start and end dates
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    if (startDate && endDate) {
+                        startDate = new Date(startDate);
+                        endDate = new Date(endDate);
+                        return data.filter(function (item) {
+                            var date = new Date(item.date);
+                            return date >= startDate && date <= endDate;
+                        });
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            "columns": [
+                { data: 'employeeCode' },
+                { data: 'employeeName' },
+                { data: 'managerName' },
+                { data: 'department' },
+                { data: 'projectName' },
+                {
+                    data: 'date',
+                    render: function (data, type, row) {
+                        var date = new Date(data);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+                        return day + '/' + month + '/' + year;
+                    }
+                },
+                { data: 'description' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        var startTime = row.startTime.split(':');
+                        var endTime = row.endTime.split(':');
+                        var totalHours = parseInt(endTime[0]) - parseInt(startTime[0]);
+                        var totalMinutes = parseInt(endTime[1]) - parseInt(startTime[1]);
+                        if (totalMinutes < 0) {
+                            totalHours--;
+                            totalMinutes += 60;
+                        }
+                        return totalHours + ' hours ' + totalMinutes + ' minutes';
+                    }
+                }
+            ],
+            "initComplete": function (settings, json) {
+                console.log('DataTables initialization complete. Received data:', json);
+            }
+        });
+
+        // Apply the filtering when the date inputs change
+        $('#employeeName').on('change', function () {
+            $('#employeeDetailsTable').DataTable().clear().draw();
+            table.ajax.reload();
+        });
+        $('#startDate, #endDate').on('change', function () {
+            table.ajax.reload();
+        });
+        $('#clearButton').on('click', function () {
+            $('#startDate').val('');
+            $('#endDate').val('');
+            $('#employeeName').val('');
+            $('#employeeDetailsTable').DataTable().clear().draw();
+            table.ajax.reload();
+        });
+    });
+
+
+
+
+</script>
+

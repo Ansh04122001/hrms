@@ -1,0 +1,666 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
+    <title>RAZORSE HRMS</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="~/context/img/favicon.ico" rel="icon">
+    <link href="~/context/img/logo.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="~/context/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/context/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/context/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/context/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/context/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/context/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/context/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="~/context/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <link href="~/context/css/style.css" rel="stylesheet">
+</head>
+@{
+    string username = User.Identity.Name;
+}
+<body >
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+
+            <a href="" class="logo d-flex align-items-center">
+                <img src="~/context/img/logo.png" alt="">
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div>
+
+
+
+        <nav class="header-nav ">
+            @* <div class="search-bar">
+                <form class="search-form d-flex align-items-center" method="POST" action="#">
+                    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                </form>
+            </div><!-- End Search Bar --> *@
+            <ul class="d-flex align-items-center">
+
+               @*  <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a><!-- End Notification Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            You have 4 new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-warning"></i>
+                            <div>
+                                <h4>Lorem Ipsum</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>30 min. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-x-circle text-danger"></i>
+                            <div>
+                                <h4>Atque rerum nesciunt</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>1 hr. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Sit rerum fuga</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>2 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            <div>
+                                <h4>Dicta reprehenderit</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">Show all notifications</a>
+                        </li>
+
+                    </ul><!-- End Notification Dropdown Items -->
+
+                </li><!-- End Notification Nav -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number">3</span>
+                    </a><!-- End Messages Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            You have 3 new messages
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Maria Hudson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>4 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Anna Nelson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>6 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>David Muldon</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>8 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">Show all messages</a>
+                        </li>
+
+                    </ul><!-- End Messages Dropdown Items -->
+
+                </li><!-- End Messages Nav --> *@
+
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="" alt="" class="rounded-circle">
+                        Hi @username
+                    </a><!-- End Profile Image Icon -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            @username
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/UserAuthentication/ChangePassword">
+                                <i class="bi bi-gear"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/UserAuthentication/Logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </nav>
+
+    </header>
+    <aside id="sidebar" class="sidebar">
+          @if (User.IsInRole("admin"))
+            {
+            <ul class="sidebar-nav" id="sidebar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("Display", "Admin")">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li><!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse">
+                        <i class="bi bi-menu-button-wide"></i><span>Department</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Department", "Admin")">
+                                <i class="bi bi-circle"></i><span>Add Department</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("DepartmentList", "Admin")">
+                                <i class="bi bi-circle"></i><span>Manage Department</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li><!-- End Components Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Employee-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Employee-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Employee", "Admin")">
+                                <i class="bi bi-circle"></i><span>Add Employee</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Employeelist", "Admin")">
+                                <i class="bi bi-circle"></i><span>Manage Employee</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li><!-- End Forms Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Timesheet-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Timesheet</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Timesheet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Timesheet", "Admin")">
+                                <i class="bi bi-circle"></i><span>View Timesheet</span>
+                            </a>
+                        </li>
+                   
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Attendance-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-check-all"></i><span>Attendance</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Attendance-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("AttendanceManage", "Admin")">
+                                <i class="bi bi-circle"></i><span>View Attendance</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Leave-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-calendar-check"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Leave-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("ViewLeave", "Admin")">
+                                <i class="bi bi-circle"></i><span>View Leave</span>
+                            </a>
+                        </li>
+                        <li>
+
+                            <a href="@Url.Action("holidaylist", "UserAuthentication")">
+                                <i class="bi bi-circle"></i><span>Holiday List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                
+
+                <li class="nav-heading">Pages</li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Contact", "UserAuthentication")">
+                        <i class="bi bi-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        }
+        else if (User.IsInRole("user"))
+        {
+            <ul class="sidebar-nav" id="sidebar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("Display", "Dashboard")">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li><!-- End Dashboard Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Timesheet-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Timesheet</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Timesheet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Timesheet", "Dashboard")">
+                                <i class="bi bi-circle"></i><span>Add Timesheet</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ViewTimesheet", "Dashboard")">
+                                <i class="bi bi-circle"></i><span>View Timesheet</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Attendance-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-check-all"></i><span>Attendance</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Attendance-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("AttendanceView", "Dashboard")">
+                                <i class="bi bi-circle"></i><span>View Attendance</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Leave-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Leave-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("ApplyLeave", "Dashboard")">
+                                <i class="bi bi-circle"></i><span>Apply Leave</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ViewLeave", "Dashboard")">
+                                <i class="bi bi-circle"></i><span>View Leave</span>
+                            </a>
+                        </li>
+                        <li>
+                            
+                            <a href="@Url.Action("holidaylist", "UserAuthentication")">
+                                <i class="bi bi-circle"></i><span>Holiday List</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li><!-- End Forms Nav -->
+
+                <li class="nav-heading">Pages</li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("EmpProfile", "Dashboard")">
+                        <i class="bi bi-person"></i>
+                        <span>Profile</span>
+                    </a>
+                </li><!-- End Profile Page Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Contact", "UserAuthentication")">
+                        <i class="bi bi-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        }
+         else if (User.IsInRole("Manager"))
+        {
+            <ul class="sidebar-nav" id="sidebar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("Dashboard", "Manager")">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li><!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Employee-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Employee-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        
+                        <li>
+                            <a href="@Url.Action("ViewEmployee", "Manager")">
+                                <i class="bi bi-circle"></i><span>View Employee</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li><!-- End Forms Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Timesheet-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Timesheet</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Timesheet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("ViewTimesheet", "Manager")">
+                                <i class="bi bi-circle"></i><span>View Timesheet</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Attendance-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-check-all"></i><span>Attendance</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Attendance-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("ViewAttendance", "Manager")">
+                                <i class="bi bi-circle"></i><span>View Attendance</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Leave-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Leave-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                    <a href="@Url.Action("ApplyLeave", "Manager")">
+                                <i class="bi bi-circle"></i><span>Apply Leave</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ViewLeave", "Manager")">
+                                <i class="bi bi-circle"></i><span>View Leave</span>
+                            </a>
+                        </li>
+                        <li>
+
+                            <a href="@Url.Action("holidaylist", "UserAuthentication")">
+                                <i class="bi bi-circle"></i><span>Holiday List</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li><!-- End Forms Nav -->
+                <li class="nav-heading">Pages</li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("ManagerProfile", "Manager")">
+                        <i class="bi bi-person"></i>
+                        <span>Profile</span>
+                    </a>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Contact", "UserAuthentication")">
+                        <i class="bi bi-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        }
+          else if (User.IsInRole("hr"))
+        {
+            <ul class="sidebar-nav" id="sidebar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("Dashboard", "Hr")">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li><!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse">
+                        <i class="bi bi-menu-button-wide"></i><span>Department</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Department", "Admin")">
+                                <i class="bi bi-circle"></i><span>Add Department</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("DepartmentList", "Admin")">
+                                <i class="bi bi-circle"></i><span>Manage Department</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li><!-- End Components Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Employee-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Employee-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Employee", "Admin")">
+                                <i class="bi bi-circle"></i><span>Add Employee</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Employeelist", "Admin")">
+                                <i class="bi bi-circle"></i><span>Manage Employee</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li><!-- End Forms Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Timesheet-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Timesheet</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Timesheet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("Timesheet", "Admin")">
+                                <i class="bi bi-circle"></i><span>View Timesheet</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Attendance-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-check-all"></i><span>Attendance</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Attendance-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("AttendanceManage", "Admin")">
+                                <i class="bi bi-circle"></i><span>View Attendance</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#Leave-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-calendar-check"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Leave-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="@Url.Action("ViewLeave", "Admin")">
+                                <i class="bi bi-circle"></i><span>View Attendance</span>
+                            </a>
+                        </li>
+                        <li>
+
+                            <a href="@Url.Action("holidaylist", "UserAuthentication")">
+                                <i class="bi bi-circle"></i><span>Holiday List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-heading">Pages</li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("HrProfile", "Hr")">
+                        <i class="bi bi-person"></i>
+                        <span>Profile</span>
+                    </a>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Contact", "UserAuthentication")">
+                        <i class="bi bi-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        }
+    </aside>
+    <div class="container ">
+        @RenderBody()
+    </div>
+    <script>
+      
+    </script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="~/context/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/context/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/context/vendor/chart.js/chart.umd.js"></script>
+    <script src="~/context/vendor/echarts/echarts.min.js"></script>
+    <script src="~/context/vendor/quill/quill.min.js"></script>
+    <script src="~/context/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/context/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/context/vendor/php-email-form/validate.js"></script>
+    <!-- Template Main JS File -->
+    <script src="~/context/js/main.js"></script>
+</body>
+</html>
+

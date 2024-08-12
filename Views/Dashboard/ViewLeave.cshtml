@@ -1,0 +1,149 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>View Leave</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Display">Home</a></li>
+                <li class="breadcrumb-item">Leave</li>
+                <li class="breadcrumb-item active"><a asp-controller="Dashboard" asp-action="ViewLeave">View Leave</a> </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Leave</h5>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Name:</label>
+                                    <input class="form-control" value="@Model.FirstName" readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" id="startDate" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" id="endDate" class="form-control">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <label for="clearButton">Clear:</label>
+                                    <input type="button" id="clearButton" class="form-control" value="Clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table id="employeeDetailsTable" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Code</th>
+                                        <th>Employee Name</th>
+                                        <th>Manager Name</th>
+                                        <th>Department</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    $(document).ready(function () {
+        var table = $('#employeeDetailsTable').DataTable({
+            "ajax": {
+                "url": "/Dashboard/GetLeaveDetails?name=" + encodeURIComponent('@Model.FirstName'),
+                "type": "GET",
+                "datatype": "json",
+                "error": function (xhr, errorText, errorType) {
+                    console.log("An error occurred while fetching data.");
+                },
+                "dataSrc": function (data) {
+                    
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    if (startDate && endDate) {
+                        startDate = new Date(startDate);
+                        endDate = new Date(endDate);
+                        return data.filter(function (item) {
+                            var date = new Date(item.date);
+                            return date >= startDate && date <= endDate;
+                        });
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            "columns": [
+                { "data": "employeeCode" },
+                { "data": "employeeName" },
+                { "data": "managerName" },
+                { "data": "department" },
+                {
+                    "data": 'fromDate',
+                    "render": function (data, type, row) {
+                        var date = new Date(data);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+                        return day + '/' + month + '/' + year;
+                    }
+                },
+                {
+                    "data": 'toDate',
+                    "render": function (data, type, row) {
+                        var date = new Date(data);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+                        return day + '/' + month + '/' + year;
+                    }
+                },
+                { "data": "description" },
+                {
+                    "data": "isActive",
+                    "render": renderIsActive
+                }
+
+            ],
+            "initComplete": function (settings, json) {
+                console.log('DataTables initialization complete. Received data:', json);
+            }
+        });
+
+        // Apply the filtering when the date inputs change
+        $('#startDate, #endDate').on('change', function () {
+            table.ajax.reload();
+        });
+        $('#clearButton').on('click', function () {
+            $('#startDate').val('');
+            $('#endDate').val('');
+            table.ajax.reload();
+        });
+    });
+    function renderIsActive(data, type, row) {
+        debugger;
+        if (data == true) {
+            return '<span style="color: green;">Confirm</span>';
+        } else {
+            return '<span style="color: red;">Pending</span>';
+        }
+
+    }
+</script>

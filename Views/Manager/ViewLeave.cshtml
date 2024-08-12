@@ -1,0 +1,215 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>View Leave</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Manager" asp-action="Dashboard">Home</a></li>
+                <li class="breadcrumb-item">TimeSheet</li>
+                <li class="breadcrumb-item active"><a asp-controller="Manager" asp-action="ViewLeave">View Leave</a> </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Leave</h5>
+                        <div class="container">
+                            <div class="row">
+                                <input type="hidden" value="@ViewBag.ManagerName" id="managername"/>
+                                <div class="col-md-4">
+                                    <label for="employeeName">Employee Name:</label>
+                                    <select class="form-control" id="employeeName" asp-items="@ViewBag.Employees">
+                                        <option value="">Select Employee</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" id="startDate" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" id="endDate" class="form-control">
+                                </div>
+                                <div class="col-md-2 ">
+                                    <label for="clearButton">Clear:</label>
+                                    <input type="button" id="clearButton" class="form-control" value="Clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table class="table" id="employeeDetailsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Code</th>
+                                        <th>Employee Name</th>
+                                        <th>Manager Name</th>
+                                        <th>Department</th>
+                                        <th>From Date </th>
+                                        <th>To Date</th>
+                                        <th>Description</th>
+                                        <th>Leave Status</th>
+                                        <th>Button</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+        <div id="toastContainer" style="position: absolute; top: 0; right: 0;"></div>
+    </div>
+
+    <div class="toast" id="leaveApplicationToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <strong class="mr-auto">Notification</strong>
+            <small>Just now</small>
+        </div>
+        <div class="toast-body">
+            <!-- This message will be updated dynamically -->
+        </div>
+    </div>
+
+</main>
+
+
+
+<script>
+    $(document).ready(function () {
+        var table = $('#employeeDetailsTable').DataTable({
+            "ajax": {
+                url: '/Manager/Leavedetails',
+                type: 'GET',
+                data: function (d) {
+                    d.employeeName = $('#employeeName').val();
+                    d.managerName = $('#managername').val();
+                },
+                datatype: "json",
+                error: function (xhr, errorText, errorType) {
+                    console.log("An error occurred while fetching data:", errorText, errorType);
+                },
+                "dataSrc": function (data) {
+                    // Filter data based on start and end dates
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+                    if (startDate && endDate) {
+                        startDate = new Date(startDate);
+                        endDate = new Date(endDate);
+                        return data.filter(function (item) {
+                            var date = new Date(item.date);
+                            return date >= startDate && date <= endDate;
+                        });
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            "columns": [
+                { "data": "employeeCode" },
+                { "data": "employeeName" },
+                { "data": "managerName" },
+                { "data": "department" },
+                {
+                    "data": 'fromDate',
+                    "render": function (data, type, row) {
+                        var date = new Date(data);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+                        return day + '/' + month + '/' + year;
+                    }
+                },
+                {
+                    "data": 'toDate',
+                    "render": function (data, type, row) {
+                        var date = new Date(data);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+                        return day + '/' + month + '/' + year;
+                    }
+                },
+                { "data": "description" },
+                {
+                    "data": "isActive",
+                    "render": renderActive
+                },
+                {
+                    "data": "isActive",
+                    "render": renderIsActive
+                }
+
+            ],
+            "initComplete": function (settings, json) {
+                console.log('DataTables initialization complete. Received data:', json);
+            }
+        });
+
+        // Apply the filtering when the date inputs change
+        $('#employeeName').on('change', function () {
+            $('#employeeDetailsTable').DataTable().clear().draw();
+            table.ajax.reload();
+        });
+        $('#startDate, #endDate').on('change', function () {
+            table.ajax.reload();
+        });
+        $('#clearButton').on('click', function () {
+            $('#startDate').val('');
+            $('#endDate').val('');
+            $('#employeeName').val('');
+            $('#employeeDetailsTable').DataTable().clear().draw();
+            table.ajax.reload();
+        });
+    });
+
+    function ToggleThumb(id, para) {
+        debugger;
+        $.ajax({
+            url: '/Manager/Thumb/' + id + '?para=' + para,
+            type: 'POST',
+            success: function (data) {
+                var toastMessage = para === 'Accept' ? 'Leave application confirmed.' : 'Leave application rejected.';
+                var toast = $('#leaveApplicationToast').clone();
+                toast.find('.toast-body').text(toastMessage);
+                $('#toastContainer').append(toast);
+                toast.toast('show');
+
+                $('#employeeDetailsTable').DataTable().ajax.reload();
+            },
+            error: function () {
+                console.error('Failed to toggle thumb.');
+            }
+        });
+    }
+
+   
+    function renderIsActive(data, type, row) {
+        return '<div class="btn-group">' +
+            '<button class="btn btn-success btn-sm" onclick="ToggleThumb(' + row.id + ', \'Accept\')">Accept</button>' +
+            '<button class="btn btn-danger btn-sm" onclick="ToggleThumb(' + row.id + ', \'Reject\')">Reject</button>' +
+            '</div>';
+    }
+
+    function renderActive(data, type, row) {
+        debugger;
+        if (data == true) {
+            return '<span style="color: green;">Confirm</span>';
+        } else {
+            return '<span style="color: red;">Pending</span>';
+        }
+
+    }
+</script>

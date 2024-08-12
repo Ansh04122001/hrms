@@ -1,0 +1,87 @@
+﻿@{
+    string username = User.Identity.Name;
+}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>ApplyLeave</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Manager" asp-action="Dashboard">Home</a></li>
+                <li class="breadcrumb-item">Leave</li>
+                <li class="breadcrumb-item active"><a asp-controller="Manager" asp-action="ApplyLeave">Apply Leave</a> </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Apply Leave</h5>
+                        <div class="table-responsive">
+                            <form asp-controller="Manager" asp-action="AddLeave" method="post">
+                                <table class="table">
+
+                                    <tr>
+                                        <td>
+                                            <label for="EmployeeCode">Employee Code<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="EmployeeCode" readonly name="EmployeeCode" value="@Model.EmployeeCode" required>
+                                        </td>
+                                        <td>
+                                            <label for="EmployeeName">Employee Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="EmployeeName" readonly name="EmployeeName" value="@Model.EmployeeName" required>
+                                        </td>
+                                        <td>
+                                            <label for="ManagerName">Manager Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="ManagerName" readonly name="ManagerName" value="@Model.ManagerName" required>
+                                        </td>
+                                        <td>
+                                            <label for="Department">Department<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="Department" readonly name="Department" value="@Model.Department" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <label for="FromDate">From Date<span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" id="FromDate" name="FromDate" required>
+                                        </td>
+                                        <td>
+                                            <label for="ToDate">To Date<span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" id="ToDate" name="ToDate" required>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <label for="Description">Description<span class="text-danger">*</span></label>
+                                            <textarea class="form-control" id="Description" name="Description" rows="3" required></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="text-right mt-4">
+                                    <button type="submit" class="btn btn-sm btn-danger">Apply Leave</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var fromDateInput = document.getElementById("FromDate");
+        var toDateInput = document.getElementById("ToDate");
+
+        // Set the min attribute to today's date
+        var today = new Date().toISOString().split("T")[0];
+        fromDateInput.setAttribute("min", today);
+        toDateInput.setAttribute("min", today);
+    });
+</script>

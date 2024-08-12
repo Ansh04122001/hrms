@@ -1,0 +1,106 @@
+﻿@{
+    string username = User.Identity.Name;
+}
+
+
+
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align: center;">Login</h5>
+                                <div class="d-flex align-items-center" style="justify-content: center;">
+                                    <form id="loginForm" asp-action="Login" method="post">
+                                        <input type="hidden" name="userId" value="@username" />
+                                        <button id="loginButton" class="btn btn-sm btn-danger" type="submit" @(ViewBag.IsLoggedIn ? "disabled" : "")>Login</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title" style="text-align: center;">Logout</h5>
+                                <div class="d-flex align-items-center" style="justify-content: center;">
+                                    <form id="logoutForm" asp-action="Logout" method="post">
+                                        <input type="hidden" name="userId" value="@username" />
+                                        <button id="logoutButton" class="btn btn-sm btn-danger" type="submit" @(ViewBag.IsLoggedIn ? "" : "disabled")>Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+            <div class="toast" id="resultToast" style="position: absolute; top: 0; right: 0;" data-delay="5000">
+                <div class="toast-header">
+                    <strong class="mr-auto">Notification</strong>
+                </div>
+                <div class="toast-body" id="toastMessage">
+                    <!-- Message will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main><!-- End #main -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = @Html.Raw(Json.Serialize(ViewBag.IsLoggedIn));
+        document.getElementById("loginButton").disabled = isLoggedIn;
+        document.getElementById("logoutButton").disabled = !isLoggedIn;
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: formData
+        });
+        const result = await response.json();
+        if (result.success) {
+            document.getElementById("loginButton").disabled = true;
+            document.getElementById("logoutButton").disabled = false;
+            showToast(result.message);
+        } else {
+            showToast(result.message);
+        }
+    });
+
+    document.getElementById("logoutForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: formData
+        });
+        const result = await response.json();
+        if (result.success) {
+            document.getElementById("loginButton").disabled = false;
+            document.getElementById("logoutButton").disabled = true;
+            showToast(result.message);
+        } else {
+            showToast(result.message);
+        }
+    });
+
+    function showToast(message) {
+        document.getElementById('toastMessage').innerText = message;
+        $('#resultToast').toast('show');
+    }
+
+</script>

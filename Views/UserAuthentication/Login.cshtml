@@ -1,0 +1,117 @@
+﻿@model Hrms.Models.DTO.LoginModel
+@{
+    Layout = null;
+}
+<link href="~/context/css/style.css" rel="stylesheet">
+<link href="~/context/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/context/img/favicon.ico" rel="icon">
+<link href="~/context/img/logo.png" rel="apple-touch-icon">
+<title>RAZORSE HRMS</title>
+<style>
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .fs-4 {
+        font-size: 1.5rem !important;
+        font-weight: 600;
+    }
+    button {
+        background-color: #87CEFA; /* Light Blue color */
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0 16px; /* Adjusted margin to add space below the button */
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .msg {
+        padding: 0px;
+        color: red;
+    }
+
+    .err {
+        color: red;
+        font-size: 13px;
+    }
+
+    .h2 {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    
+    .center-text {
+        text-align: center;
+        margin-top: 8px;
+    }
+</style>
+
+<main>
+    <div class="container">
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a class="logo d-flex align-items-center w-auto">
+                                <img src="~/context/img/logo.png" alt="">
+                                
+                            </a>
+                        </div>
+
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Hrms</h5>
+                                    <p class="text-center small">Enter your username & password to login</p>
+                                </div>
+                                <form asp-action="Login" method="post">
+                                    <div class="container">
+                                       
+                                        <div class="form-group">
+                                            <label asp-for="Username"><b>Username</b><span class="text-danger">*</span></label>
+                                            <input type="text" asp-for="Username" class="form-control" placeholder="Enter Username">
+                                            <div class="msg">
+                                                <span class="err" asp-validation-for="Username"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label asp-for="Password"><b>Password</b><span class="text-danger">*</span></label>
+                                            <input type="password" asp-for="Password" class="form-control" placeholder="Enter Password">
+                                            <div class="msg">
+                                                <span asp-validation-for="Password" class="err"></span>
+                                            </div>
+                                        </div>
+
+                                        @if (TempData["msg"] != null)
+                                        {
+                                            <div class="msg">@TempData["msg"]</div>
+                                        }
+
+                                        <div class="text-right mt-4">
+                                            <button type="submit" class="btn btn-sm btn-danger">Login</button>
+                                        </div>
+                                       
+                                   
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>

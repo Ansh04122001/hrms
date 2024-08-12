@@ -1,0 +1,91 @@
+﻿@{
+    string username = User.Identity.Name;
+}
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="row">
+
+                    <!-- Department Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Department</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-building"></i>
+                                    </div>
+                                    <div class="ps-3 text-center">
+                                        <p style="font-weight: bold; font-size: 20px; color: blue;">@ViewBag.Department.Count</p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employee Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Employee</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="ps-3 text-center">
+                                        <p style="font-weight: bold; font-size: 20px; color: blue;">@ViewBag.Employee.Count</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Revenue Card -->
+                </div>
+            </div>
+         @*    <div class="col-lg-6">
+                <div class="row">
+
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Timesheet</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="ps-3 text-center">
+                                        <p style="font-weight: bold; font-size: 20px; color: blue;">@ViewBag.EmployeeCount.Count</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Attendance</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                   <div class="ps-3 text-center">
+                                        <p style="font-weight: bold; font-size: 20px; color: blue;">@ViewBag.EmployeeCount.Count</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- InprogressTask Card -->
+
+                </div>
+            </div> *@
+        </div>
+    </section>
+</main><!-- End #main -->
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -1,0 +1,392 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>View Employee</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Manager" asp-action="Dashboard">Home</a></li>
+                <li class="breadcrumb-item">Employee</li>
+                <li class="breadcrumb-item active"><a asp-controller="Manager" asp-action="ViewEmployee">View Employee</a> </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Employee</h5>
+                        <div class="container">
+                            <div class="row">
+                                <input type="hidden" value="@ViewBag.ManagerName" id="managername" />
+                                <div class="col-md-4">
+                                    <label for="employeeName">Employee Name:</label>
+                                    <select class="form-control" id="employeeName" asp-items="@ViewBag.Employees">
+                                        <option value="">Select Employee</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-2 ">
+                                    <label for="clearButton">Clear:</label>
+                                    <input type="button" id="clearButton" class="form-control" value="Clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table class="table" id="employeeDetailsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Code</th>
+                                        <th>Department Name</th>
+                                        <th>Manager Name</th>
+                                        <th>First Name</th>
+                                        <th>Designation</th>
+                                        <th>Contact</th>
+                                        <th>Employee Status</th>
+                                        <th>Button</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- View Modal -->
+ 
+</main>
+<div class="modal" tabindex="-1" role="dialog" id="viewDetailsModal">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">View Employee Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="modal-body">
+                                <from class="row">
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="EmployeeCode">Employee Code<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="EmployeeCode" id="EmployeeCode" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="DepartmentName">Department Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="DepartmentName" id="DepartmentName" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="ManagerName">Manager Name<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="ManagerName" id="ManagerName" readonly />
+
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-label">First Name<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="FirstName" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Last Name<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="LastName" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Gender<span class="text-danger">*</span></label>
+                                        <div class="d-flex ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Gender" id="male" value="Male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Gender" id="female" value="Female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Gender" id="other" value="Other">
+                                                <label class="form-check-label" for="other">Other</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="DateOfBirth">Date of Birth<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="DateOfBirth" id="DateOfBirth" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Designation<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="Designation" readonly />
+                                    </div>
+
+
+
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="DateOfJoining">Date Of Joining<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="DateOfJoining" id="DateOfJoining" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="ExperienceLevel">Experience Level<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="ExperienceLevel" id="ExperienceLevel" readonly />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label" for="Experience">Experience</label>
+                                        <input type="text" class="form-control" name="Experience" id="Experience" readonly />
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-label">Father Name<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="FatherName" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Marital Status<span class="text-danger">*</span></label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="MaritalStatus" id="married" value="Married" onclick="showAnniversary()">
+                                            <label class="form-check-label" for="married">Married</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="MaritalStatus" id="unmarried" value="Unmarried" onclick="hideAnniversary()">
+                                            <label class="form-check-label" for="unmarried">Unmarried</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3" id="anniversaryDiv" style="display:none;">
+                                        <label class="form-label" for="AnniversaryDate">Date of Anniversary</label>
+                                        <input class="form-control" name="AnniversaryDate" id="AnniversaryDate" readonly>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label"> Contact Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="EmployeeContact" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Alternate Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="AlternateNumber" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Email (Official)<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="EmailOfficial" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Email (Personal)<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="EmailPersonal" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Aadhar Card Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="AadharCardNumber" readonly />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">PAN Card Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" name="PANCardNumber" readonly />
+
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-label">Present Address<span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="EmployeeAddress" name="PresentAddress" placeholder="Present Address" readonly></textarea>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Permanent Address<span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="CorrespondenceAddress" name="PermanentAddress" placeholder="Permanent Address" readonly></textarea>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-label">State<span class="text-danger">*</span></label>
+                                        <select class="form-control" id="stateSelect" name="StateId">
+                                            <option value="">Select State</option>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                <option value="@state.Id">@state.Name</option>
+                                            }
+                                        </select>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">City<span class="text-danger">*</span></label>
+                                        <select class="form-control" id="citySelect" name="CityId">
+                                            <option value="">Select City</option>
+                                            @foreach (var city in ViewBag.Cities)
+                                            {
+                                                <option value="@city.Id" data-state="@city.StateId">@city.Name</option>
+                                            }
+                                        </select>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">PAN Card<span class="text-danger">*</span></label>
+                                        <div id="pancardPreview"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Emp Images<span class="text-danger">*</span></label>
+
+                                        <div id="EmpImagesPreview"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Aadhaar Card<span class="text-danger">*</span></label>
+
+                                        <div id="aadhaarcardPreview"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Bank Details<span class="text-danger">*</span></label>
+
+                                        <div id="bankdetailsPreview"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Education Details<span class="text-danger">*</span></label>
+
+                                        <div id="educationdetailsPreview"></div>
+                                    </div>
+                                </from>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var table = $('#employeeDetailsTable').DataTable({
+            "ajax": {
+                url: '/Manager/Employeedetails',
+                type: 'GET',
+                data: function (d) {
+                    d.employeeName = $('#employeeName').val();
+                    d.managerName = $('#managername').val();
+                },
+                "dataType": "json",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "employeeCode" },
+                { "data": "departmentName" },
+                { "data": "managerName" },
+                { "data": "firstName" },
+                { "data": "designation" },
+                { "data": "employeeContact" },
+                {
+                    "data": "isActive",
+                    "render": renderActive
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return '<div class="dropdown d-flex justify-content-center">' +
+                            '<button class="btn btn-sm btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="bi bi-three-dots-vertical"></i>Action</button>' +
+                            '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' +
+                            '<button type="button" class="btn" data-toggle="modal" data-target="#viewDetailsModal" onclick="getEmployeeDetails(' + row.id + ')"><i class="bi bi-eye mr-2"></i>View Details</button> '
+                        '</div>' +
+                            '</div>';
+                    }
+                }
+
+            ],
+            "initComplete": function (settings, json) {
+                console.log('DataTables initialization complete. Received data:', json);
+            },
+            "error": function (xhr, errorType, exception) {
+                console.error('An error occurred during DataTables Ajax request:', xhr, errorType, exception);
+            }
+        });
+
+        // Apply the filtering when the date inputs change
+        $('#employeeName').on('change', function () {
+            $('#employeeDetailsTable').DataTable().clear().draw();
+            table.ajax.reload();
+        });
+
+        $('#clearButton').on('click', function () {
+            $('#employeeName').val('');
+            $('#employeeDetailsTable').DataTable().clear().draw();
+            table.ajax.reload();
+        });
+    });
+
+
+
+
+    function renderActive(data, type, row) {
+        debugger;
+        if (data == true) {
+            return '<span style="color: green;">Active</span>';
+        } else {
+            return '<span style="color: red;">Inactive</span>';
+        }
+
+    }
+
+    function getEmployeeDetails(id) {
+        $.ajax({
+            url: '/Manager/GetEmployeeDetails/' + id,
+            type: 'GET',
+            success: function (data) {
+                var dateOfBirth = new Date(data.dateOfBirth);
+                var formattedDate = dateOfBirth.toISOString().split('T')[0];
+                var dateOfJoining = new Date(data.dateOfJoining);
+                var formatted = dateOfJoining.toISOString().split('T')[0];
+                $('#EmployeeCode').val(data.employeeCode);
+                $('input[name="DepartmentName"]').val(data.departmentName);
+                $('#ManagerName').val(data.managerName);
+                $('input[name="FirstName"]').val(data.firstName);
+                $('input[name="LastName"]').val(data.lastName);
+                $('input[name="Gender"][value="' + data.gender + '"]').prop('checked', true);
+                $('input[name="DateOfBirth"]').val(formattedDate);
+                $('input[name="Designation"]').val(data.designation);
+                $('input[name="DateOfJoining"]').val(formatted);
+                $('input[name="ExperienceLevel"]').val(data.experienceLevel);
+                $('input[name="Experience"]').val(data.experience);
+                $('input[name="FatherName"]').val(data.fatherName);
+                $('input[name="MaritalStatus"][value="' + data.maritalStatus + '"]').prop('checked', true);
+                if (data.maritalStatus === 'Married') {
+                    $('#anniversaryDiv').show();
+                    $('input[name="AnniversaryDate"]').val(data.anniversaryDate);
+                } else {
+                    $('#anniversaryDiv').hide();
+                }
+                $('input[name="EmployeeContact"]').val(data.employeeContact);
+                $('input[name="AlternateNumber"]').val(data.alternateNumber);
+                $('input[name="EmailOfficial"]').val(data.emailOfficial);
+                $('input[name="EmailPersonal"]').val(data.emailPersonal);
+                $('input[name="AadharCardNumber"]').val(data.aadharCardNumber);
+                $('input[name="PANCardNumber"]').val(data.panCardNumber);
+                $('textarea[name="PresentAddress"]').val(data.presentAddress);
+                $('textarea[name="PermanentAddress"]').val(data.permanentAddress);
+                $('select[name="StateId"]').val(data.stateId);
+                // Trigger change event to populate cities based on the selected state
+                $('input[name="StateId"]').trigger('change');
+                $('select[name="CityId"]').val(data.cityId);
+
+                $('#pancardPreview').html('<img src="' + data.panCard + '" alt="PAN Card" style="max-width: 100px; max-height: 100px;">');
+                $('#EmpImagesPreview').html('<img src="' + data.empImages + '" alt="Employee Images" style="max-width: 100px; max-height: 100px;">');
+                $('#aadhaarcardPreview').html('<img src="' + data.aadhaarCard + '" alt="Aadhaar Card" style="max-width: 100px; max-height: 100px;">');
+                $('#bankdetailsPreview').html('<img src="' + data.bankDetails + '" alt="Bank Details" style="max-width: 100px; max-height: 100px;">');
+                $('#educationdetailsPreview').html('<img src="' + data.educationDetails + '" alt="Education Details" style="max-width: 100px; max-height: 100px;">');
+            },
+            error: function () {
+                alert('Failed to fetch employee details.');
+            }
+        });
+    }
+</script>

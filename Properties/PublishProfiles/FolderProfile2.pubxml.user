@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>F:\Publish\Hrms</_PublishTargetUrl>
+    <History>True|2024-07-01T06:30:20.9352704Z;False|2024-07-01T11:56:32.8498449+05:30;True|2024-06-05T16:08:45.1311937+05:30;True|2024-05-30T15:34:53.1102380+05:30;False|2024-05-30T15:33:31.5948250+05:30;True|2024-05-27T23:03:18.5556728+05:30;True|2024-05-27T10:42:45.5869877+05:30;True|2024-05-27T10:41:41.4087912+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

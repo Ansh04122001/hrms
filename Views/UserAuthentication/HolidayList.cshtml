@@ -1,0 +1,163 @@
+﻿<style>
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table-responsive .list {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: auto;
+}
+
+.table-responsive .list thead {
+    background-color: #f9f9f9;
+}
+
+.table-responsive .list th, .table-responsive .list td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table-responsive .list th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.table-responsive .list tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+@@media (max-width: 768px) {
+    .table-responsive .list thead {
+        display: none;
+    }
+
+    .table-responsive .list, .table-responsive .list tbody, .table-responsive .list tr, .table-responsive .list td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-responsive .list tr {
+        margin-bottom: 15px;
+    }
+
+    .table-responsive .list td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .table-responsive .list td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        padding-right: 10px;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+</style>
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container mt-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="card-title text-center w-100">Holidays for the year 2024</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="list">
+                                <thead>
+                                    <tr>
+                                        <th>Holiday Name</th>
+                                        <th>Date</th>
+                                        <th>Day</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Holiday Name">New Year Leave</td>
+                                        <td data-label="Date">01-Jan-24</td>
+                                        <td data-label="Day">Monday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Republic Day</td>
+                                        <td data-label="Date">26-Jan-24</td>
+                                        <td data-label="Day">Friday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Holi</td>
+                                        <td data-label="Date">25-Mar-24</td>
+                                        <td data-label="Day">Monday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Independence Day</td>
+                                        <td data-label="Date">15-Aug-24</td>
+                                        <td data-label="Day">Thursday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Raksha Bandhan</td>
+                                        <td data-label="Date">19-Aug-24</td>
+                                        <td data-label="Day">Monday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Janmashtami</td>
+                                        <td data-label="Date">26-Aug-24</td>
+                                        <td data-label="Day">Monday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Gandhi Jayanti</td>
+                                        <td data-label="Date">02-Oct-24</td>
+                                        <td data-label="Day">Wednesday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Maha Navami</td>
+                                        <td data-label="Date">12-Oct-24</td>
+                                        <td data-label="Day">Saturday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Dussehra</td>
+                                        <td data-label="Date">13-Oct-24</td>
+                                        <td data-label="Day">Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Diwali Eve</td>
+                                        <td data-label="Date">01-Nov-24</td>
+                                        <td data-label="Day">Friday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Diwali</td>
+                                        <td data-label="Date">02-Nov-24</td>
+                                        <td data-label="Day">Saturday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Bhai Dooj</td>
+                                        <td data-label="Date">03-Nov-24</td>
+                                        <td data-label="Day">Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Holiday Name">Christmas</td>
+                                        <td data-label="Date">25-Dec-24</td>
+                                        <td data-label="Day">Wednesday</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
